@@ -1,0 +1,140 @@
+
+body {
+    margin: 0;
+    padding: 10px 0 40px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    font-family: "IBM Plex Mono", monospace;  
+    font-weight: 500;  
+    font-size: 17px;
+}
+
+#terminal-wrap {
+    display: flex;
+    flex-direction: column-reverse;
+}
+a {border-bottom: 2px dashed; text-decoration: none;}
+p {margin: 7px 0;}
+
+#terminal-input {
+    background: transparent !important;
+    border: none !important;
+    color: inherit !important;
+    font-size: inherit !important;  
+    font-weight: inherit !important;
+}
+
+#terminal-input:focus:focus-visible,
+#terminal-input:focus {
+    background: transparent !important;
+    border: none !important;
+    outline: none; 
+}
+
+body.dark {
+    background: rgb(29, 42, 53);
+    color: rgb(203, 213, 225);
+}
+
+.dark .styleOne{color: rgb(255, 157, 0);}
+.dark .styleTwo {color: rgb(5, 206, 145);}
+.dark #terminal-input {caret-color:rgb(5, 206, 145);}
+
+form div{
+    width: 100%;  
+}
+
+form div{
+    width: 100%;  
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+form label {
+    margin-right: 5px;
+}
+
+form input {
+    flex-grow: 1;
+}
+#terminal-output {
+    margin: 0;
+}
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    box-sizing: content-box;
+}
+
+.welcome-block {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.welcome-text {
+    width: 60%;
+}
+
+.welcome-name {
+    font-size: 0.7em;
+    margin: 0;
+    margin: 0 0 40px;
+}
+
+.welcome-img {
+    width: 40%;
+    font-size: 0.5em;
+}
+@media (min-width: 576px){
+    .container {
+        max-width: 540px;
+        padding:0  18px;
+        box-sizing: border-box;
+    }
+}
+
+@media (min-width: 768px){
+    .container {
+        max-width: 720px;
+        padding:0  24px;
+        box-sizing: border-box;
+    }
+}
+
+@media (min-width: 992px){
+    .container {
+        max-width: 960px;
+        padding:0  16px;
+        box-sizing: border-box;
+    }
+}
+
+@media (min-width: 1200px){
+    .container {
+        max-width: 1140px;
+        padding:0  30px;
+        box-sizing: border-box;
+    }
+}
+
+@media (min-width: 1280px){
+    .container {
+        max-width: 1560px;
+        padding: 0px  50px;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 576px){
+    .container {
+        width: calc(100% - 40px);
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
