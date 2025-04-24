@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 10px 0 40px;
-    min-height: 100vh;
+    min-height: calc(100vh - 50px);
     overflow-x: hidden;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
@@ -11,10 +11,6 @@ body {
     font-size: 17px;
 }
 
-#terminal-wrap {
-    display: flex;
-    flex-direction: column-reverse;
-}
 a {border-bottom: 2px dashed; text-decoration: none;}
 p {margin: 7px 0;}
 
@@ -24,6 +20,7 @@ p {margin: 7px 0;}
     color: inherit !important;
     font-size: inherit !important;  
     font-weight: inherit !important;
+    font-family: inherit;
 }
 
 #terminal-input:focus:focus-visible,
@@ -33,14 +30,96 @@ p {margin: 7px 0;}
     outline: none; 
 }
 
-body.dark {
+body#dark {
     background: rgb(29, 42, 53);
     color: rgb(203, 213, 225);
 }
+#dark .styleOne{color: rgb(255, 157, 0);}
+#dark .styleTwo {color: rgb(5, 206, 145);}
+#dark #terminal-input {caret-color:rgb(5, 206, 145);}
 
-.dark .styleOne{color: rgb(255, 157, 0);}
-.dark .styleTwo {color: rgb(5, 206, 145);}
-.dark #terminal-input {caret-color:rgb(5, 206, 145);}
+body#light {
+    background: rgb(239, 243, 243);
+    color: rgb(51, 65, 85);
+}
+#light .styleOne{color: rgb(255, 157, 0);}
+#light .styleTwo {color: rgb(2, 116, 116);}
+#light #terminal-input {caret-color:rgb(2, 116, 116);}
+
+body#blue-matrix {
+    background: rgb(16, 17, 22);
+    color: rgb(255, 255, 255);
+}
+#blue-matrix .styleOne{color: rgb(96, 253, 255);}
+#blue-matrix .styleTwo {color: rgb(0, 255, 156);}
+#blue-matrix #terminal-input {caret-color:rgb(0, 255, 156);}
+
+body#espresso {
+    background: rgb(50, 50, 50);
+    color: rgb(247, 247, 247);
+}
+#espresso .styleOne{color: rgb(165, 194, 96);}
+#espresso .styleTwo {color: rgb(225, 228, 139);}
+#espresso #terminal-input {caret-color:rgb(225, 228, 139);}
+
+body#green-goblin {
+    background: rgb(0, 0, 0);
+    color: rgb(1, 255, 0);
+}
+#green-goblin .styleOne{color: rgb(4, 165, 0);}
+#green-goblin .styleTwo {color: rgb(229, 229, 0);}
+#green-goblin #terminal-input {caret-color:rgb(229, 229, 0);}
+
+body#ubuntu {
+    background: rgb(45, 9, 34);
+    color: rgb(255, 255, 255);
+}
+#ubuntu .styleOne{color: rgb(128, 217, 50);}
+#ubuntu .styleTwo {color: rgb(128, 217, 50);}
+#ubuntu #terminal-input {caret-color:rgb(128, 217, 50);}
+
+.command-list p {
+    margin: 3px 0;
+}
+
+.command-history p {
+    margin: 0;
+}
+.command {
+    width: 150px;
+    display: inline-block;
+}
+
+.command-div {
+    margin-top: 20px;
+}
+
+.cowsay pre {
+    margin: 0;
+}
+
+.about p {
+    margin: 10px 0;
+}
+
+.themes p {
+    margin: 0;
+}
+
+.themes pre {
+    margin: 0 0 15px;
+}
+
+.projects div {
+    margin: 30px 0;
+}
+
+.projects div p {
+    margin: 0;
+}
+.cowsay p {
+    margin-bottom: 0;
+}
 
 form div{
     width: 100%;  
@@ -53,21 +132,37 @@ form div{
     flex-wrap: nowrap;
 }
 
+form {
+    margin-top: 19px;
+}
+
 form label {
-    margin-right: 5px;
+    margin-right: 8px;
 }
 
 form input {
     flex-grow: 1;
 }
+
 #terminal-output {
     margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+    max-width: 600px;
+}
+
+#terminal-output span{
+    margin-right: 20px;
 }
 .container {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
     box-sizing: content-box;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .welcome-block {
@@ -88,25 +183,9 @@ form input {
 }
 
 .welcome-img {
-    width: 40%;
+    width: 35%;
     font-size: 0.5em;
 }
-@media (min-width: 576px){
-    .container {
-        max-width: 540px;
-        padding:0  18px;
-        box-sizing: border-box;
-    }
-}
-
-@media (min-width: 768px){
-    .container {
-        max-width: 720px;
-        padding:0  24px;
-        box-sizing: border-box;
-    }
-}
-
 @media (min-width: 992px){
     .container {
         max-width: 960px;
@@ -131,10 +210,45 @@ form input {
     }
 }
 
-@media (max-width: 576px){
+@media (max-width: 1200px){
+    .welcome-name {
+        font-size: 0.6em;  margin:
+        0 0 30px;
+    }
+    .welcome-img {
+        font-size: 0.4em;
+    }
+}
+
+@media (max-width: 992px) {
+    .welcome-block {
+        flex-wrap: wrap;
+    }
+    .welcome-text {
+        width: 100%;
+    }
+
+    .welcome-img {
+        display: none;
+    }
+
     .container {
         width: calc(100% - 40px);
         padding-left: 20px;
         padding-right: 20px;
+    }
+}
+
+
+@media (max-width: 550px) {
+    .welcome-name {
+        font-size: 0.5em;  margin:
+        0 0 20px;
+    }
+}
+@media (max-width: 460px) {
+    .welcome-name {
+        font-size: 0.4em;  margin:
+        0 0 10px;
     }
 }

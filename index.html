@@ -9,9 +9,9 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     </head>
-    <body class="dark">
+    <body>
         <section>   
-            <div class="container" id="terminal-wrap">
+            <div class="container">
                 <form>
                     <div>
                     <label for="terminal-input">
@@ -19,8 +19,9 @@
                     </label>
                     <input title="terminal-input" type="text" id="terminal-input" autocomplete="off" spellcheck="false" autocapitalize="none" value="">
                     </div>
-                    <pre id="terminal-output"></pre>
+                    <p id="terminal-output"></p>
                 </form>
+                <div id="terminal-wrap"></div>
             </div>
         </section>
         <script src="js/script.js"></script>
