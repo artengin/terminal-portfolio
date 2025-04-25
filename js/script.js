@@ -1,6 +1,7 @@
 function startTerminal() {
     const body = document.querySelector('body');
     const title = document.querySelector('title');
+    const description = document.querySelector('meta[name="description"]');
     const terminal = document.querySelector('#terminal-wrap');
     const inputField = document.querySelector('#terminal-input');
     const output = document.querySelector('#terminal-output');
@@ -9,9 +10,11 @@ function startTerminal() {
         if (localStorage.getItem("lang") == "en") {
             lang = "en";
             title.innerHTML = "Portfolio Terminal of Artem Osepyan";
+            description.setAttribute("content", "Hi! My name is Artyom Osepyan! I am a Full-stack developer, with extensive experience building web applications.");
         } else {
             lang = "ru";
             title.innerHTML = "Портфолио Терминал Осепян Артема";
+            description.setAttribute("content", "Привет! Меня зовут Осепян Артем! Я Full-stack разработчик, с большим опытом создания веб-приложений.");
         }
     }
     setLang();
@@ -38,7 +41,7 @@ function startTerminal() {
     function displayCommand(value){
         const command = document.createElement('div');
         command.classList.add("command-div");
-        command.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ ${value}</span>`;
+        command.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">${value}</span></span>`;
         terminal.appendChild(command); 
     }
     
@@ -84,7 +87,7 @@ function startTerminal() {
         window.scrollTo(0, document.body.scrollHeight);
     }
     
-    function welcome() {
+    async function welcome() {
         const welcome = document.createElement('div');
         welcome.classList.add("command-div");
         let path;
@@ -93,7 +96,7 @@ function startTerminal() {
         } else {
             path = 'includes/welcome-en.html';
         }
-        fetch(path)
+        await fetch(path)
         .then(response => response.text())
         .then(html => {
             welcome.innerHTML = html;
@@ -109,7 +112,7 @@ function startTerminal() {
         help.classList.add("command-list");
         help.classList.add("command-div");
         help.innerHTML = `
-        <span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ help</span>
+        <span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">help</span></span>
         <p><span class="command styleTwo">about</span> - ${lang == "ru" ? "об авторе" : "about the author"}</p>
         <p><span class="command styleTwo">clear</span> - ${lang == "ru" ? "очистить терминал" : "clear the terminal" }</p>
         <p><span class="command styleTwo">contacts</span> - ${lang == "ru" ? "просмотреть контакты автора" : "check contacts"}</p>
@@ -129,12 +132,13 @@ function startTerminal() {
 
     function clear() {
         terminal.innerHTML = "";
+        displayCommand("clear");
     }
 
     function whoami() {
         const whoami = document.createElement('div');
         whoami.classList.add("command-div");
-        whoami.innerHTML = '<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ whoami</span><p>quest</p>';
+        whoami.innerHTML = '<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">whoami</span></span><p>quest</p>';
         terminal.appendChild(whoami); 
     }
 
@@ -143,7 +147,7 @@ function startTerminal() {
         const history = document.createElement('div');
         history.classList.add("command-div");
         history.classList.add("command-history");
-        let result = '<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ history</span>';
+        let result = '<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">history</span></span>';
         for (let i=0; i < queryHistory.length; i++) {
             result += `<p>${queryHistory[i]}</p>`;
         }
@@ -155,7 +159,7 @@ function startTerminal() {
         const contacts = document.createElement('div');
         contacts.classList.add("command-div");
         contacts.classList.add("command-list");
-        contacts.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ ${inputField.value.trimEnd()}</span>
+        contacts.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">contacts</span></span>
         <p style="margin-bottom: 10px">${lang == "ru" ? "Контакты" : "Contacts"}:</p>
         <p><span class="command styleTwo">1. Github</span> - https://github.com/artengin/</p>
         <p><span class="command styleTwo">2. E-mail</span> - art@osepyan.ru</p>
@@ -165,11 +169,12 @@ function startTerminal() {
         `;
        terminal.appendChild(contacts); 
     }
+
     function contactsGo() {
         const contacts = document.createElement('div');
         contacts.classList.add("command-div");
         contacts.classList.add("themes");
-        contacts.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ ${inputField.value.trimEnd()}</span>
+        contacts.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">contacts go</span></span>
         <p>${lang == "ru" ? "Использование" : "Usage"}: contacts go &lt;contacts-number&gt; </p>
         <p>${lang == "ru" ? "Пример" : "Example"}: contacts go 1</p>
         `;
@@ -178,47 +183,41 @@ function startTerminal() {
 
     function contacts1() {
         window.open('https://github.com/artengin/', '_blank');
-        const contacts1 = document.createElement('div');
-        contacts1.classList.add("command-div");
-        contacts1.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ contacts go 1</span>`;
-        terminal.appendChild(contacts1); 
+        displayCommand("contacts go 1");
     }
+
     function contacts2() {
         window.open('mailto:art@osepyan.ru');
-        const contacts2 = document.createElement('div');
-        contacts2.classList.add("command-div");
-        contacts2.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ contacts go 2</span>`;
-        terminal.appendChild(contacts2); 
+        displayCommand("contacts go 2");
     }
+
     function contacts3() {
         window.open('https://t.me/artengin', '_blank');
-        const contacts3 = document.createElement('div');
-        contacts3.classList.add("command-div");
-        contacts3.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ contacts go 3</span>`;
-        terminal.appendChild(contacts3); 
+        displayCommand("contacts go 3");
     }
+
     function cowsay() {
         const cowsay = document.createElement('div');
         cowsay.classList.add("command-div");
         cowsay.classList.add("themes");
-        cowsay.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ cowsay</span>
-        <pre>cowsay version 3.03, (c) 1999 Tony Monroe</pre>
+        cowsay.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">cowsay</span></span>
+        <span class="pre">cowsay version 3.03, (c) 1999 Tony Monroe</span>
         <p>${lang == "ru" ? "Использование" : "Usage"}: cowsay &lt;anything&gt; </p>
         <p>${lang == "ru" ? "Пример" : "Example"}: cowsay Hello world</p>
         `;
        terminal.appendChild(cowsay); 
     }
 
-    function cowsayOutput(value) {
+    async function cowsayOutput(value) {
         const cowsay = document.createElement('div');
         cowsay.classList.add("command-div");
         cowsay.classList.add("cowsay");
 
-        fetch('includes/cowsay.html')
+        await fetch('includes/cowsay.html')
         .then(response => response.text())
         .then(html => {
             cowsay.innerHTML = `
-            <span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ cowsay ${value}</span>
+            <span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">cowsay ${value}</span></span>
             <p>________________________</p>
             <p>< ${value} ></p>
             ${html}`;
@@ -233,8 +232,8 @@ function startTerminal() {
         const themes = document.createElement('div');
         themes.classList.add("command-div");
         themes.classList.add("themes");
-        themes.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ themes</span>
-        <pre>dark  light  blue-matrix  espresso  green-goblin  ubuntu</pre>
+        themes.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">themes</span></span>
+        <span class="pre">dark  light  blue-matrix  espresso  green-goblin  ubuntu</span>
         <p>${lang == "ru" ? "Использование" : "Usage"}: themes set &lt;theme-name&gt; </p>
         <p>${lang == "ru" ? "Пример" : "Example"}: themes set espresso</p>
         `;
@@ -245,7 +244,7 @@ function startTerminal() {
         const themes = document.createElement('div');
         themes.classList.add("command-div");
         themes.classList.add("themes");
-        themes.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ themes set</span>
+        themes.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">themes set</span></span>
         <p>${lang == "ru" ? "Использование" : "Usage"}: themes set &lt;theme-name&gt; </p>
         <p>${lang == "ru" ? "Пример" : "Example"}: themes set espresso</p>
         `;
@@ -257,7 +256,7 @@ function startTerminal() {
         projects.classList.add("command-div");
         projects.classList.add("projects");
         projects.classList.add("themes");
-        projects.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ projects</span>
+        projects.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">projects</span></span>
         <p>${lang == "ru" ? "Вот некоторые из моих проектов" : "Featured projects"}:</p>
         <div>
             <p><b><span class="styleTwo">1.</span> ${lang == "ru" ? "Интерактивные метки на изображении" : "Interactive image labels"}</b></p>
@@ -281,7 +280,7 @@ function startTerminal() {
         const projects = document.createElement('div');
         projects.classList.add("command-div");
         projects.classList.add("themes");
-        projects.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ projects go</span>
+        projects.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">projects go</span></span>
         <p>${lang == "ru" ? "Использование" : "Usage"}: projects go &lt;project-number&gt; </p>
         <p>${lang == "ru" ? "Пример" : "Example"}: projects go 1</p>
         `;
@@ -290,33 +289,24 @@ function startTerminal() {
 
     function projects1() {
         window.open("https://art.osepyan.ru/arpic/", '_blank');
-        const projects = document.createElement('div');
-        projects.classList.add("command-div");
-        projects.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ projects go 1</span>`;
-        terminal.appendChild(projects); 
+        displayCommand("projects go 1");
     }
 
     function projects2() {
         window.open("https://art.osepyan.ru/array-sorting/", '_blank');
-        const projects = document.createElement('div');
-        projects.classList.add("command-div");
-        projects.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ projects go 2</span>`;
-        terminal.appendChild(projects); 
+        displayCommand("projects go 2");
     }
 
     function projects3() {
         window.open("https://art.osepyan.ru/sudoku/", '_blank');
-        const projects = document.createElement('div');
-        projects.classList.add("command-div");
-        projects.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ projects go 3</span>`;
-        terminal.appendChild(projects); 
+        displayCommand("projects go 3");
     }
 
     function about() {
         const about = document.createElement('div');
         about.classList.add("command-div");
         about.classList.add("about");
-        about.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ about</span>
+        about.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">about</span></span>
         <p>${lang == "ru" ? "Привет! Меня зовут Осепян Артем!" : "Hi! My name is Artyom Osepyan!"}</p>
         <p>${lang == "ru" ? "Я <b>Full-stack разработчик</b>, с большим опытом создания веб-приложений." : "I am a <b>Full-stack developer</b>, with extensive experience building web applications."}</p>
         <p>${lang == "ru" ? "Люблю, когда код чистый, интерфейс — понятный, а backend — как швейцарские часы." : "I love it when the code is clean, the interface is intuitive, and the backend runs like a Swiss watch."}</p>
@@ -325,10 +315,16 @@ function startTerminal() {
     }
 
     function notFound(value) {
+        let inValue;
+        if (value.length > 24) {
+            inValue = value.slice(0, 24) + "...";
+        } else {
+            inValue = value;
+        }
         const notFound = document.createElement('div');
         notFound.classList.add("command-div");
-        notFound.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ ${value}</span>
-        <p>${lang == "ru" ? "Команда не найдена" : "Command not found"}: ${value}</p>`;
+        notFound.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">${inValue}</span></span>
+        <p>${lang == "ru" ? "Команда не найдена" : "Command not found"}: ${inValue}</p>`;
         terminal.appendChild(notFound); 
     }
 
@@ -336,7 +332,7 @@ function startTerminal() {
         const language = document.createElement('div');
         language.classList.add("command-div");
         language.classList.add("command-list");
-        language.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ language</span>
+        language.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">language</span></span>
         <p><span class="styleTwo">En</span> - ${lang == "ru" ? "Английский" : "English"}</p>
         <p><span class="styleTwo">Ru</span> - ${lang == "ru" ? "Русский" : "Russian"}</p>
         <p style="margin: 15px 0 0">${lang == "ru" ? "Использование" : "Usage"}: language set &lt;en|ru&gt; </p>
@@ -348,7 +344,7 @@ function startTerminal() {
         const language = document.createElement('div');
         language.classList.add("command-div");
         language.classList.add("command-list");
-        language.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ language set</span>
+        language.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ <span class="history-value">language set</span></span>
         <p style="margin: 0">${lang == "ru" ? "Использование" : "Usage"}: language set &lt;en|ru&gt; </p>
         <p style="margin: 0">${lang == "ru" ? "Пример" : "Example"}: language set en</p>`;
         terminal.appendChild(language); 
@@ -358,10 +354,7 @@ function startTerminal() {
         localStorage.setItem("lang", "en");
         clear();
         setLang();
-        const language = document.createElement('div');
-        language.classList.add("command-div");
-        language.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ language set en</span>`;        
-        terminal.appendChild(language); 
+        displayCommand("language set en");
         welcome();
     }
 
@@ -369,10 +362,7 @@ function startTerminal() {
         localStorage.setItem("lang", "ru");
         clear();
         setLang();
-        const language = document.createElement('div');
-        language.classList.add("command-div");
-        language.innerHTML = `<span><span class="styleOne">quest</span>@<span class="styleTwo">terminal.artengin</span>:~$ language set ru</span>`;        
-        terminal.appendChild(language); 
+        displayCommand("language set ru");
         welcome();
     }
 

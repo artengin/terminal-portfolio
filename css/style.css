@@ -106,7 +106,8 @@ body#ubuntu {
     margin: 0;
 }
 
-.themes pre {
+.themes .pre {
+    display: block;
     margin: 0 0 15px;
 }
 
@@ -183,8 +184,12 @@ form input {
 }
 
 .welcome-img {
-    width: 35%;
+    width: 38%;
     font-size: 0.5em;
+}
+#terminal-input,
+form .input {
+    width: 100%;
 }
 @media (min-width: 992px){
     .container {
@@ -229,7 +234,7 @@ form input {
     }
 
     .welcome-img {
-        display: none;
+        display: block;
     }
 
     .container {
@@ -239,16 +244,62 @@ form input {
     }
 }
 
+@media (max-width: 600px) {
+    form div{
+        flex-wrap: wrap;
+    }
+    form label {
+       width: 100%;
+    }
+
+    form input {
+        width: 100%;
+        
+    }
+    
+    form .input {
+        width: 100%;
+        position: relative;
+        box-sizing: border-box;
+        padding-left: 20px;
+    }
+    
+    .history-value {
+        width: 100%;
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        padding-left: 22px;
+    }
+    
+    .history-value::before,
+    form .input::before {
+        content: ">";
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
 
 @media (max-width: 550px) {
     .welcome-name {
-        font-size: 0.5em;  margin:
-        0 0 20px;
+        font-size: 0.5em;  
+        margin: 0 0 20px;
     }
 }
+
 @media (max-width: 460px) {
     .welcome-name {
-        font-size: 0.4em;  margin:
-        0 0 10px;
+        font-size: 0.4em;  
+        margin: 0 0 10px;
+    }
+}
+
+@media (max-width: 365px) {
+    .welcome-name {
+        font-size: 0.33em;  
+    }
+    .welcome-img {
+        font-size: 0.36em;
     }
 }
