@@ -261,7 +261,8 @@ form .input {
         width: 100%;
         position: relative;
         box-sizing: border-box;
-        padding-left: 20px;
+        display: flex;
+        align-items: center;
     }
     
     .history-value {
@@ -272,12 +273,15 @@ form .input {
         padding-left: 22px;
     }
     
-    .history-value::before,
-    form .input::before {
+    .history-value::before {
         content: ">";
         position: absolute;
         top: 0;
         left: 0;
+    }
+    form .input::before {
+        content: ">";
+        margin-right: 9px;
     }
 }
 
@@ -295,11 +299,26 @@ form .input {
     }
 }
 
+@media (max-width: 385px) {
+    .welcome-name {
+        font-size: 0.38em;  
+    }
+}
+
 @media (max-width: 365px) {
     .welcome-name {
         font-size: 0.33em;  
     }
     .welcome-img {
         font-size: 0.36em;
+    }
+}
+
+@media (max-width: 305px) {
+    .welcome-name {
+        font-size: 0.31em;  
+    }
+    .welcome-img {
+        font-size: 0.34em;
     }
 }
