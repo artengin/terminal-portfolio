@@ -105,6 +105,8 @@ function startTerminal() {
             console.error('Ошибка загрузки welcome.html:', error);
         });
         terminal.appendChild(welcome); 
+        inputField.focus();
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
     function help() {
@@ -206,6 +208,8 @@ function startTerminal() {
         <p>${lang == "ru" ? "Пример" : "Example"}: cowsay Hello world</p>
         `;
        terminal.appendChild(cowsay); 
+       inputField.focus();
+       window.scrollTo(0, document.body.scrollHeight);
     }
 
     async function cowsayOutput(value) {
