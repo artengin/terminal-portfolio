@@ -1,26 +1,25 @@
-# Terminal Portfolio
+# Terminal Portfolio  
 
-Интерактивный терминал-портфолио, созданный как альтернатива традиционному веб-сайту.  
-Проект имитирует работу командной строки с набором пользовательских команд для навигации.
+An interactive terminal-style portfolio designed as an alternative to traditional websites.  
+The project mimics a command-line interface with custom navigation commands.  
 
-#### Демо вы можете посмотреть здесь: [DEMO](https://art.osepyan.ru/)
+#### Live demo: [DEMO](https://art.osepyan.ru/)  
 
-## Особенности
+## Features  
 
-- Полноценная эмуляция терминала с автодополнением (Tab)
-- История команд (стрелки вверх/вниз)
-- Поддержка двух языков (русский/английский)
-- 6 цветовых тем на выбор
-- Команды для просмотра информации, проектов и контактов
-- Интерактивные элементы (cowsay, смена темы)
-- Адаптивный дизайн
+- Full terminal emulation with autocompletion (Tab)  
+- Command history (Up/Down arrows)  
+- Dual-language support (English/Russian)  
+- 6 customizable color themes  
+- Commands for viewing info, projects and contacts  
+- Interactive elements (cowsay, theme switching)  
+- Responsive design  
 
-## Технологии
+## Technologies  
 
-- Чистый JavaScript (ES6)
-- HTML5/CSS3
+- Pure JavaScript (ES6)  
+- HTML5/CSS3  
 
-## Использование
+## Usage  
 
-Введите `help` для просмотра доступных команд. Поддерживается автодополнение по Tab.
-
+Type `help` to view available commands. Supports Tab autocompletion.  
